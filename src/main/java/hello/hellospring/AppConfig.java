@@ -3,10 +3,7 @@ package hello.hellospring;
 import hello.hellospring.discount.DiscountPolicy;
 import hello.hellospring.discount.FixDiscountPolicy;
 import hello.hellospring.discount.RateDiscountPolicy;
-import hello.hellospring.member.Member;
-import hello.hellospring.member.MemberService;
-import hello.hellospring.member.MemberServiceImpl;
-import hello.hellospring.member.MemoryMemberRepository;
+import hello.hellospring.member.*;
 import hello.hellospring.order.Order;
 import hello.hellospring.order.OrderService;
 import hello.hellospring.order.OrderServiceImpl;
@@ -21,17 +18,15 @@ public class AppConfig { //애플리케이션에 대한 환경 구성 다 함
         return new MemberServiceImpl(memberRepository());
     }
 
-
-    @Bean
-    public MemoryMemberRepository memberRepository() {
-        return new MemoryMemberRepository();
-    }
-
-
     @Bean
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(),
                  discountPolicy());
+    }
+
+    @Bean
+    public MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
     }
 
 
